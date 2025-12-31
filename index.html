@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<style>
+  body { background: linear-gradient(135deg, #ffafbd, #ffc3a0); font-family: 'Poppins', sans-serif; text-align: center; color: #d63384; margin: 0; overflow: hidden; }
+  .screen { display: none; min-height: 100vh; flex-direction: column; justify-content: center; align-items: center; padding: 40px 20px; box-sizing: border-box; }
+  .active { display: flex; }
+  h1 { font-size: 1.8rem; margin-bottom: 20px; text-shadow: 2px 2px #fff; }
+  .card { background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); max-width: 450px; width: 100%; border: 2px solid #fff; position: relative; }
+  button { background: #ff4d6d; color: white; border: none; padding: 12px 25px; border-radius: 50px; font-size: 1rem; cursor: pointer; margin: 10px; transition: 0.3s; }
+  button:hover { transform: scale(1.05); background: #ff758f; }
+  .moving-btn { position: absolute; }
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop src="YOUR_SONG_URL_HERE.mp3"></audio>
+
+<div id="page1" class="screen active">
+  <div class="card">
+    <h1>Our 2nd Anniversary! 🥂</h1>
+    <p>Wait for the timer, my cute little responsibility...</p>
+    <div style="font-size: 2rem; font-weight: bold;" id="timer">00:00:00</div>
+    <button onclick="startGift()">Unlock My Heart 🔓</button>
+  </div>
+</div>
+
+<div id="page2" class="screen">
+  <div class="card">
+    <h1>Level 1: The Truth Test</h1>
+    <p>Who is the most "shani" (smart) person in this relationship? 😎</p>
+    <button onclick="nextPage(3)">Obviously Aryan</button>
+    <button id="btn1" onmouseover="moveButton('btn1')">Samruddhi</button>
+  </div>
+</div>
+
+<div id="page3" class="screen">
+  <div class="card">
+    <h1>Level 2: Irritation Meter</h1>
+    <p>When I irritate you, you think I am:</p>
+    <button onclick="nextPage(4)">Annoying but cute</button>
+    <button onclick="nextPage(4)">The best thing ever</button>
+    <button id="btn2" onmouseover="moveButton('btn2')">Just pure annoying</button>
+  </div>
+</div>
+
+<div id="page4" class="screen">
+  <div class="card">
+    <h1>Level 3: The Bayko Final Exam</h1>
+    <p>Are you ready to handle me for the next 100 years? 💍</p>
+    <button onclick="nextPage(5)">Yes, please!</button>
+    <button id="btn3" onmouseover="moveButton('btn3')">Ask me later 😜</button>
+  </div>
+</div>
+
+<div id="page5" class="screen">
+  <div class="card">
+    <h1>Happy 2nd Anniversary, My Bayko! ❤️</h1>
+    <p style="text-align: left; line-height: 1.8;">
+      "Hey my cute little responsibilityyyyy, today is ourrr 2nd aniversarryyyyy! Likeee 2 yearssss kitiii fast gelyttt and ktii enjoy kely apnnnn! <br><br>
+      I love being with you, I love talking to you, <b>I love irritating you</b>, I love everything abouttt youu. Your'e my peaceee. I loveee youu verrryyyyy muchh my baykooo!"
+    </p>
+    <p><strong>— Aryan</strong></p>
+  </div>
+</div>
+
+<script>
+  function startGift() {
+    document.getElementById("bgMusic").play();
+    nextPage(2);
+  }
+
+  function nextPage(num) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('page' + num).classList.add('active');
+  }
+
+  function moveButton(id) {
+    var btn = document.getElementById(id);
+    btn.classList.add('moving-btn');
+    btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+    btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+  }
+
+  function updateTimer() {
+    const target = new Date("Jan 1, 2026 00:00:00").getTime();
+    const diff = target - new Date().getTime();
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById('timer').innerHTML = h + "h " + m + "m " + s + "s ";
+  }
+  setInterval(updateTimer, 1000);
+</script>
+</body>
+</html>
